@@ -1,12 +1,18 @@
-- 👋 Hi, I’m @zakreia5552
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
+import tweepy
 
-<!---
-zakreia5552/zakreia5552 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+API_KEY = '3SfJuVbllc78dy7yYf9ulTAvV'
+API_SECRET_KEY = 'rhgnrFbvPkzWFAHaOVRMn4T42lK47Nn0zznLLJqKnHaUni7CDC'
+ACCESS_TOKEN = '3076980989-u3mdBIKDE5WQAXvWHA8yf1TURkxTmgfUnOzDbwM'
+ACCESS_TOKEN_SECRET = 'lcdhIIpsuAmFYYiYHm8rG495jrcEq5fRRCPPQALSsJ5EN'
+
+auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+
+def auto_follow_followers():
+    for follower in tweepy.Cursor(api.followers).items():
+        if not follower.following:
+            follower.follow()
+            print(f"Followed {follower.screen_name}")
+
+auto_follow_followers()
