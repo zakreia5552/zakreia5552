@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import os
 import tweepy 
 
